@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>My Profile | Our Favorite Games</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        body {
+            grid-template-columns: minmax(0, 1fr);
+            grid-template-areas:
+                "header"
+                "main"
+                "footer";
+        }
+
+        main {
+            padding: 0 20px 20px;
+        }
+
+        .profile-list {
+            display: grid;
+            grid-template-columns: max-content 1fr;
+            gap: 10px 24px;
+            margin: 18px 0;
+        }
+
+        .profile-list dt {
+            font-weight: 700;
+            color: var(--heading);
+        }
+
+        .profile-list dd {
+            margin: 0;
+            overflow-wrap: anywhere;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="main-header">
+        <a href="index.html" aria-label="Our Favorite Games home">
+            <img src="images/BeamNG_drive_logo.webp" alt="BeamNG.drive logo" class="logo-w-bg">
+        </a>
+
+        <nav class="nav-menu" aria-label="Game navigation">
+            <a href="index.html">BeamNG.drive</a>
+            <a href="minecraft.html">Minecraft</a>
+            <a href="cyberpunk.html">Cyberpunk 2077</a>
+            <a href="gta5.html">GTA V</a>
+            <a href="rdr2.html">RDR2</a>
+            <a href="cs2.html">CS2</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="card controls">
+            <button id="theme-toggle" type="button" aria-pressed="false">Dark mode</button>
+            <span>Our Favorite Games</span>
+        </section>
+
+        <section class="card" id="profile">
+            <h1>My Profile</h1>
+            <p id="profile-welcome"></p>
+
+            <dl class="profile-list" id="profile-details"></dl>
+
+            <div class="profile-actions">
+                <a href="index.html"><button type="button">Back to games</button></a>
+                <button id="logout-button" type="button">Log out</button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Team Members: Nurbakyt and Anuar</p>
+    </footer>
+
+    <script>
+        const USER_KEY = 'games-user';
+        const SESSION_KEY = 'games-session';
+        const THEME_KEY = 'games-theme';
+
+        function read(key) {
+            try {
+                return localStorage.getItem(key);
+            } catch {
+                return null;
+            }
+        }
+
+        function remove(key) {
+            try {
+                localStorage.removeItem(key);
+            } catch {}
+        }
+
+        const themeButton = document.getElementById('theme-toggle');
+
+        function applyTheme(theme) {
+            const isDark = theme === 'dark';
+            document.body.classList.toggle('dark', isDark);
+            themeButton.textContent = isDark ? 'Light mode' : 'Dark mode';
+            themeButton.setAttribute('aria-pressed', String(isDark));
+        }
+
+        applyTheme(read(THEME_KEY) || 'light');
+
+        themeButton.addEventListener('click', () => {
+            const next = document.body.classList.contains('dark') ? 'light' : 'dark';
+            try {
+                localStorage.setItem(THEME_KEY, next);
+            } catch {}
+            applyTheme(next);
+        });
+
+        let user = null;
+
+        try {
+            user = JSON.parse(read(USER_KEY) || 'null');
+        } catch {
+            user = null;
+        }
+
+        if (read(SESSION_KEY) !== 'active' || !user) {
+            window.location.replace('index.html');
+        } else {
+            document.getElementById('profile-welcome').textContent = `Welcome back, ${user.name}!`;
+
+            const details = document.getElementById('profile-details');
+            const rows = [
+                ['Name', user.name],
+                ['Email', user.email],
+                ['Phone', user.phone],
+                ['Password', '•'.repeat(8)]
+            ];
+
+            rows.forEach(([label, value]) => {
+                const dt = document.createElement('dt');
+                dt.textContent = label;
+
+                const dd = document.createElement('dd');
+                dd.textContent = value;
+
+                details.append(dt, dd);
+            });
+        }
+
+        document.getElementById('logout-button').addEventListener('click', () => {
+            remove(SESSION_KEY);
+            window.location.href = 'index.html';
+        });
+    </script>
+
+</body>
+
+</html>

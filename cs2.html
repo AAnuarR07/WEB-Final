@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Counter-Strike 2 | Our Favorite Games</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
+</head>
+
+<body>
+
+    <header id="main-header">
+        <a href="index.html" aria-label="Our Favorite Games home">
+            <img src="images/CS2_logo.png" alt="Counter-Strike 2 logo" class="logo">
+        </a>
+
+        <nav class="nav-menu" aria-label="Game navigation">
+            <a href="index.html">BeamNG.drive</a>
+            <a href="minecraft.html">Minecraft</a>
+            <a href="cyberpunk.html">Cyberpunk 2077</a>
+            <a href="gta5.html">GTA V</a>
+            <a href="rdr2.html">RDR2</a>
+            <a href="cs2.html">CS2</a>
+        </nav>
+    </header>
+
+    <aside class="sidebar">
+        <h2>Memes corner</h2>
+
+        <img src="images/CS2_meme1.webp" alt="Counter-Strike 2 meme" class="meme" loading="lazy">
+    </aside>
+
+    <main>
+
+        <section class="card controls">
+            <button id="theme-toggle" type="button" aria-pressed="false">Dark mode</button>
+            <span>Our Favorite Games</span>
+        </section>
+
+        <section class="card game-intro">
+            <h1>About Counter-Strike 2</h1>
+
+            <img src="images/cs2.webp" alt="Counter-Strike 2 game" class="game-image">
+
+            <p>Counter-Strike 2 is a competitive team-based shooter. Two teams, Terrorists and Counter-Terrorists, play short rounds to plant or defuse a bomb or eliminate the enemy.</p>
+
+            <h2>Why I Like This Game</h2>
+
+            <ul>
+                <li>Fast, skill-based gunplay</li>
+                <li>Great teamwork with friends</li>
+                <li>Many maps and game modes</li>
+                <li>Free to play</li>
+            </ul>
+        </section>
+
+        <section class="card" id="game-search">
+            <h2>Explore our games</h2>
+
+            <label for="game-query">Search by game title or genre</label>
+            <input id="game-query" type="search" placeholder="e.g. action, Minecraft">
+
+            <p id="search-status" role="status"></p>
+            <div id="game-results" class="results-grid"></div>
+        </section>
+
+        <section class="card" id="account">
+            <h2>Account</h2>
+
+            <div class="account-grid">
+
+                <form id="signup-form" novalidate>
+                    <h3>Sign Up</h3>
+
+                    <label for="signup-name">Name</label>
+                    <input id="signup-name" autocomplete="name">
+
+                    <label for="signup-email">Email</label>
+                    <input id="signup-email" autocomplete="email">
+
+                    <label for="signup-phone">Phone number</label>
+                    <input id="signup-phone" autocomplete="tel" placeholder="+7 700 123 45 67">
+
+                    <label for="signup-password">Password</label>
+                    <input id="signup-password" type="password" autocomplete="new-password">
+
+                    <button type="submit">Create account</button>
+                    <p class="form-message" id="signup-message" role="status"></p>
+                </form>
+
+                <form id="login-form" novalidate>
+                    <h3>Log In</h3>
+
+                    <label for="login-email">Email</label>
+                    <input id="login-email" autocomplete="email">
+
+                    <label for="login-password">Password</label>
+                    <input id="login-password" type="password" autocomplete="current-password">
+
+                    <button type="submit">Log in</button>
+                    <p class="form-message" id="login-message" role="status"></p>
+                </form>
+
+            </div>
+        </section>
+
+        <section class="card" id="game-api">
+            <h2>Live Game Deals</h2>
+
+            <p>Dynamic game offers loaded from the CheapShark public API.</p>
+            <button id="load-deals" type="button">Load game deals</button>
+
+            <p id="api-status" role="status">Press the button to load current deals.</p>
+            <div id="deal-results" class="results-grid"></div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Team Members: Nurbakyt and Anuar</p>
+    </footer>
+
+</body>
+
+</html>
